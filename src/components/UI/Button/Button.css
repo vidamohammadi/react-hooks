@@ -1,0 +1,10 @@
+.btn{
+    background: rgb(2, 65, 2);
+    color: white;
+    border: none;
+    width: 100px;
+    height: 30px;
+    margin: 15px auto;
+    border-radius: 10px;
+    font: inherit;
+}
