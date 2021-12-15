@@ -8,13 +8,13 @@ const ProductList = (props) => {
             <ul>
                 {props.products.map((item) => (
                     <li key={item.id} onClick={props.onRemoveItem.bind(this, item.id)}>
-                        <span>{item.title}</span>
-                        <span>{item.amount}x</span>
+                        <span>{item.title} </span>
+                        <span> x {item.amount}</span>
                     </li>
                 ))}
             </ul>
         </section>
     )
-})
+}
 
 export default ProductList
