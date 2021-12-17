@@ -4,7 +4,7 @@ import './Input.css'
 const Input = (props) => {
     if(props.name === "input"){
         return(
-            <input className="input" type="text" value={props.value} onChange={props.onChange} id={props.id}/>
+            <input className="input" type="text" value={props.value} onChange={props.onChange} id={props.id} ref={props.ref}/>
         )
     }
     return (
