@@ -1,13 +1,29 @@
-import React, { useState , useCallback} from 'react'
+import React,{ useCallback , useReducer } from 'react'
 import Search from '../Search/Search'
 import ProductForm from '../ProductForm/ProductForm'
 import ProductList from '../ProductList/ProductList'
 
+const productReducer = (state , action) => {
+    switch(action.type){
+        case 'SET':
+            return action.products
+        case 'ADD':
+            return [...state , action.product]
+        default:
+            throw new Error('Error')
+    }
+}
+
 const Products = (props) => {
-    const [products, setProducts] = useState([])
+
+    //const [products, setProducts] = useState([])
+    const [products, dispath ] = useReducer(productReducer , [])
 
     const searchProductHandler = useCallback((items) => {
-        setProducts(items)
+
+        //setProducts(items)
+        dispath({type: 'SET' , products: items})
+
     }, [])
 
     const addProductHandler = (item) => {
@@ -19,14 +35,22 @@ const Products = (props) => {
             response.json()
                 .then((responseData) => {
 
-                    setProducts((prevState) => {
-                        return [
-                            ...prevState, {
-                                id: responseData.id,
-                                ...item
-                            }
-                        ]
+                    dispath({
+                        type: 'ADD' , 
+                        product:{
+                            id: responseData.id, 
+                            ...item
+                        }
                     })
+                    // setProducts((prevState) => {
+                    //     return [
+                    //         ...prevState, {
+                    //             id: responseData.id,
+                    //             ...item
+                    //         }
+                    //     ]
+                    // })
+                    
                 })
         })
 
